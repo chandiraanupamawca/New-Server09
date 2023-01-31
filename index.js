@@ -107,7 +107,7 @@ namec=array[9]
       md:"slips",
       stname:namec
      }).then((m)=>{
-tmMsg("<b>✅ New Payment Slip has been approved </b> \n<b>Student ID</b> : "+ "RE"+sid  + "\n<b>Amount</b> : "+fee+ "\n<b>Student Name</b> : "+namec+ "\n<b>Class ID</b> : "+cid+ "\n<b>Month</b> : "+mid+ "\n<b>Class Name</b> : "+cname+ "\n<b>Firebase ID</b> : "+uid+ "\n<b>Teacher</b> : "+tname+ "\n<b>Year</b> : "+year+ "\n<b>URL</b> : "+url  )
+tmMsg("<b>🟢 New Payment Slip has been approved </b> \n<b>Student ID</b> : "+ "RE"+sid  + "\n<b>Amount</b> : "+fee+ "\n<b>Student Name</b> : "+namec+ "\n<b>Class ID</b> : "+cid+ "\n<b>Month</b> : "+mid+ "\n<b>Class Name</b> : "+cname+ "\n<b>Firebase ID</b> : "+uid+ "\n<b>Teacher</b> : "+tname+ "\n<b>Year</b> : "+year+ "\n<b>URL</b> : "+url  )
 
       res.send("done")
       })
@@ -174,7 +174,7 @@ namec=array[9]
      console.log(uid,cid,mid)
  firebase.database().ref("slips/"+uid+"/"+cid+"/"+mid).update({url:"reject"}).then((m)=>{
   res.send("done")
-  tmMsg("<b>🔵 Payment Slip has been reject </b> \n<b>Student ID</b> : "+ "RE"+sid  + "\n<b>Amount</b> : "+fee+ "\n<b>Student Name</b> : "+namec+ "\n<b>Class ID</b> : "+cid+ "\n<b>Month</b> : "+mid+ "\n<b>Class Name</b> : "+cname+ "\n<b>Firebase ID</b> : "+uid+ "\n<b>Teacher</b> : "+tname+ "\n<b>Year</b> : "+year+ "\n<b>URL</b> : "+url  )
+  tmMsg("<b>🔴 Payment Slip has been rejected </b> \n<b>Student ID</b> : "+ "RE"+sid  + "\n<b>Amount</b> : "+fee+ "\n<b>Student Name</b> : "+namec+ "\n<b>Class ID</b> : "+cid+ "\n<b>Month</b> : "+mid+ "\n<b>Class Name</b> : "+cname+ "\n<b>Firebase ID</b> : "+uid+ "\n<b>Teacher</b> : "+tname+ "\n<b>Year</b> : "+year+ "\n<b>URL</b> : "+url  )
  })
 
       } else {
@@ -271,7 +271,7 @@ app.post('/clearcc', function(req, res) {
     function verify(dt){
     if (dt!=null){
       if(dt==pass){
- tmMsg("🔴 "+email + " successfully deleted all coupens" )
+ tmMsg("<b>❌ Successfully Deleted all Copuens</b>\n"+ "<b>Admin: </b>"+ email )
  admin.database().ref("cpen/").set({}).then((cx)=>{
  res.sendStatus(200)
  })
@@ -320,7 +320,7 @@ app.post('/ccpen', function(req, res) {
     if (dt!=null){
       if(dt==pass){
      cpenid = Math.floor(100000 + Math.random() * 900000)
- tmMsg("✅ "+email + " Created New Coupen. \n<b>Coupen ID: </b>" +cpenid + "\n<b>Coupen Amount: </b>" + xc["price"]+ "\n<b>Coupen Description: </b>" + xc["text"]+ "\n<b>Class ID : </b>" + xc["cid"]+ "\n<b>Is valid for Wallet? : </b>" + xc["wt"]+ "\n<b>Valid From : </b>" + xc["start"]+ "\n<b>Valid Till: </b>" + xc["end"])
+ tmMsg("<b>✅ New Coupen has been created.<b>\n"+ "<b>Admin: </b>"+ email+ "\n<b>Coupen ID: </b>" +cpenid + "\n<b>Coupen Amount: </b>" + xc["price"]+ "\n<b>Coupen Description: </b>" + xc["text"]+ "\n<b>Class ID : </b>" + xc["cid"]+ "\n<b>Is valid for Wallet? : </b>" + xc["wt"]+ "\n<b>Valid From : </b>" + xc["start"]+ "\n<b>Valid Till: </b>" + xc["end"])
  admin.database().ref("cpen/"+cpenid).update(xc).then((cx)=>{
   console.log("ID is " + cpenid)
   res.status(203);
@@ -479,7 +479,7 @@ const retalk = (email,pass) => {
 function verify(dt){
 if (dt!=null){
   if(dt==pass){
-    tmMsg(email + " now accessed the Developer Portal")
+    tmMsg(email + " now accessed the Payments Portal")
     res.status(200);
     res.send(pass)
   } else {
