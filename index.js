@@ -125,7 +125,8 @@ tmMsg("<b>🟢 New Payment Slip has been approved </b> \n<b>Student ID</b> : "+ 
     }
     }
     
-      var path = "allows/"+email.replaceAll(".","&")
+      var path = "allows/"+email.split('.').join('&')
+  //var path = "allows/"+email.replaceAll(".","&")
       console.log(path)
     // Create References
     const dbRefObject = sad.database().ref().child(path);
@@ -188,7 +189,8 @@ namec=array[9]
     }
     }
     
-      var path = "allows/"+email.replaceAll(".","&")
+      var path = "allows/"+email.split('.').join('&')
+  //var path = "allows/"+email.replaceAll(".","&")
       console.log(path)
     // Create References
     const dbRefObject = sad.database().ref().child(path);
@@ -240,7 +242,8 @@ app.post('/byname', function(req, res) {
     }
     }
     
-      var path = "allows/"+email.replaceAll(".","&")
+      var path = "allows/"+email.split('.').join('&')
+  //var path = "allows/"+email.replaceAll(".","&")
       console.log(path)
     // Create References
     const dbRefObject = sad.database().ref().child(path);
@@ -287,7 +290,8 @@ app.post('/clearcc', function(req, res) {
     }
     }
     
-      var path = "allows/"+email.replaceAll(".","&")
+      var path = "allows/"+email.split('.').join('&')
+  //var path = "allows/"+email.replaceAll(".","&")
       console.log(path)
     // Create References
     const dbRefObject = sad.database().ref().child(path);
@@ -339,7 +343,8 @@ app.post('/ccpen', function(req, res) {
     }
     }
     
-      var path = "allows/"+email.replaceAll(".","&")
+      var path = "allows/"+email.split('.').join('&')
+  //var path = "allows/"+email.replaceAll(".","&")
       console.log(path)
     // Create References
     const dbRefObject = sad.database().ref().child(path);
@@ -392,7 +397,8 @@ app.post('/slips', function(req, res) {
     }
     }
     
-      var path = "allows/"+email.replaceAll(".","&")
+      var path = "allows/"+email.split('.').join('&')
+  //var path = "allows/"+email.replaceAll(".","&")
       console.log(path)
     // Create References
     const dbRefObject = sad.database().ref().child(path);
@@ -443,7 +449,8 @@ app.post('/classes', function(req, res) {
     }
     }
     
-      var path = "allows/"+email.replaceAll(".","&")
+      var path = "allows/"+email.split('.').join('&')
+  //var path = "allows/"+email.replaceAll(".","&")
       console.log(path)
     // Create References
     const dbRefObject = sad.database().ref().child(path);
@@ -492,8 +499,8 @@ if (dt!=null){
   res.send("No Such User")
 }
 }
-
-  var path = "allows/"+email.replaceAll(".","&")
+var path = "allows/"+email.split('.').join('&')
+//var path = "allows/"+email.replaceAll(".","&")
   console.log(path)
 // Create References
 const dbRefObject = sad.database().ref().child(path);
