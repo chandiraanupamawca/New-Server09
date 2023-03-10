@@ -608,7 +608,7 @@ app.post("/auth", function (req, res) {
 
 app.post("/getuserid", (req, res) => {
   const email = req.body.email;
-  console.log(email)
+  console.log('Request: Get User ID for ' + email)
   firebase
     .auth()
     .getUserByEmail(email)
@@ -625,7 +625,7 @@ app.post("/getuserid", (req, res) => {
 
 app.post("/banstudent", (req, res) => {
   const email = req.body.email;
-  console.log(email)
+  console.log('Request: Ban Student ' + email)
   if (!email) {
     res.status(400).send("Email is missing from request body");
     return;
@@ -642,6 +642,7 @@ app.post("/banstudent", (req, res) => {
     .then(() => {
       console.log(`${email} has been disabled`);
       res.status(200).send(`User account with email ${email} has been disabled`);
+      tmMsg(`🔒 User account with email ${email} has been disabled`);
     })
     .catch((error) => {
       console.error(error);
@@ -651,7 +652,7 @@ app.post("/banstudent", (req, res) => {
 
 app.post("/unbanstudent", (req, res) => {
   const email = req.body.email;
-  console.log(email)
+  console.log('Request: Unban Student ' + email)
   if (!email) {
     res.status(400).send("Email is missing from request body");
     return;
@@ -668,11 +669,38 @@ app.post("/unbanstudent", (req, res) => {
     .then(() => {
       console.log(`${email} has been enabled`);
       res.status(200).send(`User account with email ${email} has been enabled`);
+      tmMsg(`🔓 User account with email ${email} has been enabled`);
     })
     .catch((error) => {
       console.error(error);
       res.status(500).send("Failed to enable user account");
     });
+});
+
+app.post("/changepassword", async (req, res) => {
+  const email = req.body.email;
+  const newPassword = req.body.newPassword;
+
+  console.log("Request: Change Password for " + email + " as " + newPassword)
+
+  try {
+    // fetch user by email
+    const userRecord = await firebase.auth().getUserByEmail(email);
+    const uid = userRecord.uid;
+
+    // update user password
+    await firebase.auth().updateUser(uid, {
+      password: newPassword
+    });
+
+    console.log("Password changed successfully for " + email + " (" + newPassword + ")" );
+    tmMsg("<b>🔑 Password changed successfully</b> \n Email: " + email + "\n New Password: " + newPassword);
+    res.status(200).send("Password changed successfully for " + email + " (" + newPassword + ")");
+  } catch (error) {
+
+    console.error(error);
+    res.status(500).send("Error changing password");
+  }
 });
 
 // start the server
